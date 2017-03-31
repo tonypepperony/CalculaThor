@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     double result;
     int[] btn_id;
     Button[] btn_array;
-    boolean flagPoint;
+    boolean flagPoint; //точка
     boolean firstOperation;
 
     @Override
@@ -191,10 +191,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btnDot:
                 if (!flagPoint){
-                    if (flagAction==0){
-                        if (oper1.length()!=0){
-                            ClickNumber(".");
+                    if (flagAction==0){             //проверяем первое число или второе
+                        if (oper1.length()!=0){     //если что-то введено
+                            ClickNumber(".");       //ставим точку
                         }else{ClickNumber("0.");}
+                        flagPoint = true;
                     }else {
                         if(oper2.length() != 0){
                             ClickNumber(".");
