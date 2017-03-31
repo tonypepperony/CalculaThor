@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int[] btn_id;
     Button[] btn_array;
     boolean flagPoint;
+    boolean firstOperation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,31 +109,52 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case 1:
                         op1 = (long) (Double.parseDouble(oper1) * 1000000000);
                         op2 = (long) (Double.parseDouble(oper2) * 1000000000);
-                        result = ((double) (op1 + op2))/1000000000;
+
+                        if (firstOperation){
+                            result = ((double) (op1 + op2))/1000000000;
+                        } else {
+                            result = result +((double) (op2/1000000000));
+                        }
                         showNumber(procNumber(result));
-                        clearVariables();
+                        firstOperation = false;
                         break;
+
                     case 2:
                         op1 = (long) (Double.parseDouble(oper1) * 1000000000);
                         op2 = (long) (Double.parseDouble(oper2) * 1000000000);
-                        result = ((double) (op1 - op2))/1000000000;
+                        if (firstOperation){
+                            result = ((double) (op1 - op2))/1000000000;
+                        } else {
+                            result = result -((double) (op2/1000000000));
+                        }
                         showNumber(procNumber(result));
-                        clearVariables();
+                        firstOperation = false;
                         break;
+
                     case 3:
-                        result = Double.parseDouble(oper1) * Double.parseDouble(oper2);
+                        if (firstOperation){
+                            result = Double.parseDouble(oper1) * Double.parseDouble(oper2);
+                        } else {
+                            result = result * Double.parseDouble(oper2);
+                        }
                         showNumber(procNumber(result));
-                        clearVariables();
+                        firstOperation = false;
                         break;
+
                     case 4:
                         if (Double.parseDouble(oper2)!=0){
-                            result = Double.parseDouble(oper1) / Double.parseDouble(oper2);
+                            if (firstOperation){
+                                result = Double.parseDouble(oper1) / Double.parseDouble(oper2);
+                            }else {
+                                result = result / Double.parseDouble(oper2);
+                            }
                             showNumber(procNumber(result));
-                            clearVariables();
+                            firstOperation = false;
                             break;
                         } else {
                             Toast.makeText(this,"Ошибка",Toast.LENGTH_LONG).show();}
                 }
+
                 break;
 
             case R.id.btnC:{
@@ -258,6 +280,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         flagAction = 0;
         result = 0;
         flagPoint = false;
+        firstOperation = true;
     }
 
 }
