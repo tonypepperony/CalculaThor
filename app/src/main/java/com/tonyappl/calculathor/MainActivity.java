@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btn0:
                 if (flagAction == 0){
+                    if (oper1.equals("0")){break;}
                     if (oper1.length()!=0)ClickNumber("0");
                 }else{
                     if (!(oper2.equals("0")))ClickNumber("0");
