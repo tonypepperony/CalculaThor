@@ -185,23 +185,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private String procNumber(double res) {
-        String num = null;
+        String num;
         String prenum;
         long part_int = (long) (res - res%1);
         long part_frac = Math.round(res%1 * 1000000000);
 
         if (part_frac == 0) {
             num = Long.toString(part_int);
-            if (num.length() > 11) {
+            if (num.length() > 10) {
                 num = "owerflow";
             }
         }else{
-            if (Long.toString(part_int).length() > 10){
+            if (Long.toString(part_int).length() > 9){
                 num = "owerflow";
             } else {
                 prenum = Double.toString(res);
-                if (prenum.length()>11){
-                    num = prenum.substring(0, 12);
+                if (prenum.length()>10){
+                    num = prenum.substring(0, 9) + "..";
                 }else {
                     num = prenum;
                 }

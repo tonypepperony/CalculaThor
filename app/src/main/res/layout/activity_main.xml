@@ -28,8 +28,8 @@
             android:id="@+id/tv_display"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="123456789023"
-            android:textSize="50sp"
+            android:text="1234567890"
+            android:textSize="60sp"
             android:gravity="end"
             android:layout_marginTop="10dp"/>
 
