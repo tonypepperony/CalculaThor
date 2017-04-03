@@ -101,61 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btnEqual:
-                long op1;
-                long op2;
-
-                if (oper1.length()==0)oper1="0";
-                if (oper2.length()==0)oper2="0";
-                switch (flagAction){
-                    case 1:
-                        op1 = (long) (Double.parseDouble(oper1) * 1000000000);
-                        op2 = (long) (Double.parseDouble(oper2) * 1000000000);
-
-                        if (firstOperation){
-                            result = ((double) (op1 + op2))/1000000000;
-                        } else {
-                            result = result +((double) (op2/1000000000));
-                        }
-                        showNumber(procNumber(result));
-                        firstOperation = false;
-                        break;
-
-                    case 2:
-                        op1 = (long) (Double.parseDouble(oper1) * 1000000000);
-                        op2 = (long) (Double.parseDouble(oper2) * 1000000000);
-                        if (firstOperation){
-                            result = ((double) (op1 - op2))/1000000000;
-                        } else {
-                            result = result -((double) (op2/1000000000));
-                        }
-                        showNumber(procNumber(result));
-                        firstOperation = false;
-                        break;
-
-                    case 3:
-                        if (firstOperation){
-                            result = Double.parseDouble(oper1) * Double.parseDouble(oper2);
-                        } else {
-                            result = result * Double.parseDouble(oper2);
-                        }
-                        showNumber(procNumber(result));
-                        firstOperation = false;
-                        break;
-
-                    case 4:
-                        if (Double.parseDouble(oper2)!=0){
-                            if (firstOperation){
-                                result = Double.parseDouble(oper1) / Double.parseDouble(oper2);
-                            }else {
-                                result = result / Double.parseDouble(oper2);
-                            }
-                            showNumber(procNumber(result));
-                            firstOperation = false;
-                            break;
-                        } else {
-                            Toast.makeText(this,"Ошибка",Toast.LENGTH_LONG).show();}
-                }
-
+                equal();
                 break;
 
             case R.id.btnC:{
@@ -205,6 +151,63 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 }
                 break;
+        }
+    }
+
+    private void equal() {
+        long op1;
+        long op2;
+
+        if (oper1.length()==0)oper1="0";
+        if (oper2.length()==0)oper2="0";
+        switch (flagAction){
+            case 1:
+                op1 = (long) (Double.parseDouble(oper1) * 1000000000);
+                op2 = (long) (Double.parseDouble(oper2) * 1000000000);
+
+                if (firstOperation){
+                    result = ((double) (op1 + op2))/1000000000;
+                } else {
+                    result = result +((double) (op2/1000000000));
+                }
+                showNumber(procNumber(result));
+                firstOperation = false;
+                break;
+
+            case 2:
+                op1 = (long) (Double.parseDouble(oper1) * 1000000000);
+                op2 = (long) (Double.parseDouble(oper2) * 1000000000);
+                if (firstOperation){
+                    result = ((double) (op1 - op2))/1000000000;
+                } else {
+                    result = result -((double) (op2/1000000000));
+                }
+                showNumber(procNumber(result));
+                firstOperation = false;
+                break;
+
+            case 3:
+                if (firstOperation){
+                    result = Double.parseDouble(oper1) * Double.parseDouble(oper2);
+                } else {
+                    result = result * Double.parseDouble(oper2);
+                }
+                showNumber(procNumber(result));
+                firstOperation = false;
+                break;
+
+            case 4:
+                if (Double.parseDouble(oper2)!=0){
+                    if (firstOperation){
+                        result = Double.parseDouble(oper1) / Double.parseDouble(oper2);
+                    }else {
+                        result = result / Double.parseDouble(oper2);
+                    }
+                    showNumber(procNumber(result));
+                    firstOperation = false;
+                    break;
+                } else {
+                    Toast.makeText(this,"Ошибка",Toast.LENGTH_LONG).show();}
         }
     }
 
