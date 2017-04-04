@@ -12,13 +12,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnOne, btnTwo, btnThree, btnFour, btnFive, btnSix, btnSeven, btnEight, btnNine, btnZero;
     Button btnPlus, btnMinus, btnEqual, btnMulti, btnDiv, btnPlusMinus, btnDot, btnRadical, btnC, btnSquare;
     TextView tvDisplay;
-    String oper1, oper2;
+    String oper1, oper2, oper3;
     int flagAction;
     double result;
     int[] btn_id;
     Button[] btn_array;
     boolean flagPoint; //точка
     boolean firstOperation;
+    boolean op3on; //проверка введено ли второе число
+    boolean stepOne;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         clearVariables();
         showNumber(oper1);
-
+        stepOne = true;
     }
 
     @Override
@@ -81,28 +83,89 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btnPlus:
-                flagAction = 1;
-                flagPoint = false;
-                break;
+                if (!op3on) {
+                        flagAction = 1;
+                        flagPoint = false;
+                        break;
+                    }else {
+                    if (stepOne) {
+                        equal();
+                        stepOne = false;
+                        flagAction = 1;
+                        break;
+                            }else {
+                             nextEqual();
+                             flagAction = 1;
+                        break;
+                        }
+
+                    }
 
             case R.id.btnMinus:
-                flagAction = 2;
-                flagPoint = false;
-                break;
+                if (!op3on) {
+                    flagAction = 2;
+                    flagPoint = false;
+                    break;
+                }else {
+                    if (stepOne) {
+                        equal();
+                        stepOne = false;
+                        flagAction = 2;
+                        break;
+                    }else {
+                        nextEqual();
+                        flagAction = 2;
+                        break;
+                    }
+
+                }
 
             case R.id.btnMulti:
-                flagAction = 3;
-                flagPoint = false;
-                break;
+                if (!op3on) {
+                    flagAction = 3;
+                    flagPoint = false;
+                    break;
+                }else {
+                    if (stepOne) {
+                        equal();
+                        stepOne = false;
+                        flagAction = 3;
+                        break;
+                    }else {
+                        nextEqual();
+                        flagAction = 3;
+                        break;
+                    }
+
+                }
 
             case R.id.btnDiv:
-                flagAction = 4;
-                flagPoint = false;
-                break;
+                if (!op3on) {
+                    flagAction = 4;
+                    flagPoint = false;
+                    break;
+                }else {
+                    if (stepOne) {
+                        equal();
+                        stepOne = false;
+                        flagAction = 4;
+                        break;
+                    }else {
+                        nextEqual();
+                        flagAction = 4;
+                        break;
+                    }
+
+                }
 
             case R.id.btnEqual:
-                equal();
-                break;
+                if (stepOne){
+                    equal();
+                    break;
+                }else {
+                    nextEqual();
+                    break;
+                }
 
             case R.id.btnC:{
                 clearVariables();
@@ -155,6 +218,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void equal() {
+
         long op1;
         long op2;
 
@@ -172,6 +236,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 showNumber(procNumber(result));
                 firstOperation = false;
+                op3on = true;
                 break;
 
             case 2:
@@ -184,6 +249,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 showNumber(procNumber(result));
                 firstOperation = false;
+                op3on = true;
                 break;
 
             case 3:
@@ -194,6 +260,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 showNumber(procNumber(result));
                 firstOperation = false;
+                op3on = true;
                 break;
 
             case 4:
@@ -205,7 +272,51 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                     showNumber(procNumber(result));
                     firstOperation = false;
+                    op3on = true;
                     break;
+                } else {
+                    Toast.makeText(this,"Ошибка",Toast.LENGTH_LONG).show();}
+        }
+    }
+
+    private void nextEqual() {
+        long op1;
+        long op2;
+
+        if (oper3.length()==0)oper3="0";
+
+        switch (flagAction){
+            case 1:
+                op1 = (long) (result * 1000000000);
+                op2 = (long) (Double.parseDouble(oper3) * 1000000000);
+                result = ((double) (op1 + op2))/1000000000;
+                showNumber(procNumber(result));
+                oper3 = "";
+                break;
+
+            case 2:
+                op1 = (long) (result * 1000000000);
+                op2 = (long) (Double.parseDouble(oper3) * 1000000000);
+                result = ((double) (op1 - op2))/1000000000;
+                showNumber(procNumber(result));
+                oper3 = "";
+                break;
+
+            case 3:
+                result = result * Double.parseDouble(oper3);
+                showNumber(procNumber(result));
+                firstOperation = false;
+                oper3 = "";
+                break;
+
+            case 4:
+                if (Double.parseDouble(oper3)!=0){
+                    result = result / Double.parseDouble(oper3);
+                    showNumber(procNumber(result));
+                    firstOperation = false;
+                    oper3 = "";
+                    break;
+
                 } else {
                     Toast.makeText(this,"Ошибка",Toast.LENGTH_LONG).show();}
         }
@@ -243,32 +354,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void ClickNumber(String num) {
-        if(flagAction == 0){
-            if (checkOver(oper1)){
-                Toast.makeText(this,"limit", Toast.LENGTH_LONG).show();
-            }else {
-                oper1 = oper1 + num;
-                showNumber(oper1);
-            }
-        }else{
-            if (checkOver(oper2)){
-                Toast.makeText(this,"limit", Toast.LENGTH_LONG).show();
-            }else {
-                oper2 = oper2 + num;
-                showNumber(oper2);
-            }
+        if (firstOperation) {
+            if (flagAction == 0) {
+                if (checkOver(oper1)) {
+                    Toast.makeText(this, "limit", Toast.LENGTH_LONG).show();
+                } else {
+                    oper1 = oper1 + num;
+                    showNumber(oper1);
+                }
+            } else {
+                if (checkOver(oper2)) {
+                    Toast.makeText(this, "limit", Toast.LENGTH_LONG).show();
+                } else {
+                    oper2 = oper2 + num;
+                    showNumber(oper2);
+                    op3on = true;
+                }
 
+            }
+        }else {
+            if (checkOver(oper3)) {
+                Toast.makeText(this, "limit", Toast.LENGTH_LONG).show();
+            } else {
+                oper3 = oper3 + num;
+                showNumber(oper3);
+                op3on = true;
+            }
         }
     }
 
     private boolean checkOver(String var) {
         int corr = 0;
         if (var.contains("."))corr = 1;
-        if (var.length()-corr == 10){
-            return true;
-        }else {
-            return false;
-        }
+        return var.length() - corr == 10;
     }
 
     private void showNumber(String number) {
@@ -282,10 +400,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void clearVariables() {
         oper1 = "";
         oper2 = "";
+        oper3 = "";
+        op3on = false;
         flagAction = 0;
         result = 0;
         flagPoint = false;
         firstOperation = true;
+        stepOne = true;
     }
 
 }
