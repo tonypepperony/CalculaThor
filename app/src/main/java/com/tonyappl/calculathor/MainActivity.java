@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     boolean flagPoint; //точка
     boolean firstOperation;
     boolean op3on; //проверка введено ли второе число
-    boolean stepOne;
+    boolean stepOne; //проверка первое ли матем. действие
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -174,23 +174,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             case R.id.btnSqr:{
-                if (flagAction == 0){
-                    if (oper1.length() == 0)oper1="0";
-                    result = Math.pow(Double.parseDouble(oper1),2);
+                if (!op3on) {
+                    if (flagAction == 0) {
+                        if (oper1.length() == 0) oper1 = "0";
+                        result = Math.pow(Double.parseDouble(oper1), 2);
+                        showNumber(procNumber(result));
+                        clearVariables();
+                    }
+                    break;
+                }else {
+                    result = Math.pow(result, 2);
                     showNumber(procNumber(result));
-                    clearVariables();
+                    break;
                 }
-                break;
             }
 
             case R.id.btnRadical:{
-                if (flagAction==0){
-                    if (oper1.length() == 0)oper1="0";
-                    result = Math.sqrt(Double.parseDouble(oper1));
+                if (!op3on) {
+                    if (flagAction == 0) {
+                        if (oper1.length() == 0) oper1 = "0";
+                        result = Math.sqrt(Double.parseDouble(oper1));
+                        showNumber(procNumber(result));
+                        clearVariables();
+                    }
+                    break;
+                }else {
+                    result = Math.sqrt(result);
                     showNumber(procNumber(result));
-                    clearVariables();
+                    break;
                 }
-                break;
             }
 
 //            case R.id.btnPlusMinus:{
@@ -275,7 +287,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     op3on = true;
                     break;
                 } else {
-                    Toast.makeText(this,"Ошибка",Toast.LENGTH_LONG).show();}
+                    Toast.makeText(this,"делить на 0 нельзя товарищь",Toast.LENGTH_LONG).show();}
         }
     }
 
@@ -318,7 +330,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
 
                 } else {
-                    Toast.makeText(this,"Ошибка",Toast.LENGTH_LONG).show();}
+                    Toast.makeText(this,"делить на 0 нельзя товарищь",Toast.LENGTH_LONG).show();}
         }
     }
 
