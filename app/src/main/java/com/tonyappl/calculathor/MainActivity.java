@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if (oper1.length() == 0) oper1 = "0";
                         result = Math.pow(Double.parseDouble(oper1), 2);
                         showNumber(procNumber(result));
-                        clearVariables();
+                        op3on = true;
                     }
                     break;
                 }else {
@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if (oper1.length() == 0) oper1 = "0";
                         result = Math.sqrt(Double.parseDouble(oper1));
                         showNumber(procNumber(result));
-                        clearVariables();
+                        op3on = true;
                     }
                     break;
                 }else {
