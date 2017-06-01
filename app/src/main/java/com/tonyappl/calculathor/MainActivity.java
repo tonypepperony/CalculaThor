@@ -205,10 +205,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
 
-//            case R.id.btnPlusMinus:{
-//                oper1 = -1*oper1;
-//                showNumber(procNumber(oper1));
-//            }
+            case R.id.btnPlusMinus:{
+                if (!op3on) {
+                    if (flagAction == 0) {
+                        if (oper1.length() == 0) oper1 = "0";
+                        double plusMinus = Double.parseDouble(oper1);
+                        plusMinus = plusMinus * -1;
+                        oper1 = String.valueOf(plusMinus);
+                        showNumber(procNumber(Double.parseDouble(oper1)));
+                        break;
+                    } else {
+                        if (oper2.length() == 0) oper2 = "0";
+                        double plusMinus = Double.parseDouble(oper2);
+                        plusMinus = plusMinus * -1;
+                        oper2 = String.valueOf(plusMinus);
+                        showNumber(procNumber(Double.parseDouble(oper2)));
+                        break;
+                    }
+                }else {
+                    result = result * -1;
+                    showNumber(procNumber(result));
+                    break;
+                }
+            }
 
 
             case R.id.btnDot:
