@@ -43,6 +43,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString("tvDisplay", tvDisplay.getText().toString());
+        outState.putString("oper1", oper1);
+        outState.putString("oper2", oper2);
+        outState.putString("oper3", oper3);
+        outState.putInt("flagAction", flagAction);
+        outState.putDouble("result", result);
+        outState.putBoolean("flagPoint", flagPoint);
+        outState.putBoolean("firstOperation", firstOperation);
+        outState.putBoolean("op3on", op3on);
+        outState.putBoolean("stepOne", stepOne);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        tvDisplay.setText(savedInstanceState.getString("tvDisplay"));
+        oper1 = savedInstanceState.getString("oper1");
+        oper2 = savedInstanceState.getString("oper2");
+        oper3 = savedInstanceState.getString("oper3");
+        flagAction = savedInstanceState.getInt("flagAction");
+        result = savedInstanceState.getDouble("result");
+        flagPoint = savedInstanceState.getBoolean("flagPoint");
+        firstOperation = savedInstanceState.getBoolean("firstOperation");
+        op3on = savedInstanceState.getBoolean("op3on");
+        stepOne = savedInstanceState.getBoolean("stepOne");
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn1:
