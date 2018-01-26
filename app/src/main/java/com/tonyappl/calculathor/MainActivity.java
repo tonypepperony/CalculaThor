@@ -223,6 +223,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 result2 = ((double) (op1 + op2))/1000000000;
                 showNumber(procNumber(result2));
                 //op3on = true;
+                result = result2;
                 break;
 
             case 2:
@@ -231,11 +232,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 result2 = ((double) (op1 - op2))/1000000000;
                 showNumber(procNumber(result2));
                 //op3on = true;
+                result = result2;
                 break;
 
             case 3:
                 result2 = result * Double.parseDouble(oper2);
                 showNumber(procNumber(result2));
+                result = result2;
                 //op3on = true;
                 break;
 
@@ -243,7 +246,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (Double.parseDouble(oper2)!=0){
                     result2 = result / Double.parseDouble(oper2);
                     showNumber(procNumber(result2));
-                    //op3on = true;
+                    result = result2;//op3on = true;
                     break;
                 } else {
                     Toast.makeText(this,"делить нельзя на 0",Toast.LENGTH_LONG).show();}
