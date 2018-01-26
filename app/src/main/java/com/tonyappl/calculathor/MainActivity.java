@@ -19,8 +19,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button[] btn_array;
     boolean flagPoint; //точка
     boolean firstOperation;
-    boolean op3on; //проверка введено ли второе число
+    //boolean op3on; //проверка введено ли второе число
     boolean stepOne; //проверка первое ли матем. действие
+    private double result2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         clearVariables();
         showNumber(oper1);
         stepOne = true;
+        firstOperation = true;
     }
 
     @Override
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         outState.putDouble("result", result);
         outState.putBoolean("flagPoint", flagPoint);
         outState.putBoolean("firstOperation", firstOperation);
-        outState.putBoolean("op3on", op3on);
+        //outState.putBoolean("op3on", op3on);
         outState.putBoolean("stepOne", stepOne);
         super.onSaveInstanceState(outState);
     }
@@ -69,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         result = savedInstanceState.getDouble("result");
         flagPoint = savedInstanceState.getBoolean("flagPoint");
         firstOperation = savedInstanceState.getBoolean("firstOperation");
-        op3on = savedInstanceState.getBoolean("op3on");
+        //op3on = savedInstanceState.getBoolean("op3on");
         stepOne = savedInstanceState.getBoolean("stepOne");
     }
 
@@ -137,8 +139,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
             case R.id.btnEqual:
+                if (firstOperation){
                     equal();
                     break;
+                } else {
+                    nextEqual();
+                    break;
+                }
 
             case R.id.btnC:{
                 clearVariables();
@@ -151,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if (oper1.length() == 0) oper1 = "0";
                         result = Math.pow(Double.parseDouble(oper1), 2);
                         showNumber(procNumber(result));
-                        op3on = true;
+                        //op3on = true;
                     }
                     break;
             }
@@ -161,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if (oper1.length() == 0) oper1 = "0";
                         result = Math.sqrt(Double.parseDouble(oper1));
                         showNumber(procNumber(result));
-                        op3on = true;
+                        //op3on = true;
                     }
                     break;
             }
@@ -203,8 +210,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void equal() {
-
+    private void nextEqual() {
         long op1;
         long op2;
 
@@ -212,11 +218,54 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (oper2.length()==0)oper2="0";
         switch (flagAction){
             case 1:
+                op1 = (long) (result * 1000000000);
+                op2 = (long) (Double.parseDouble(oper2) * 1000000000);
+                result2 = ((double) (op1 + op2))/1000000000;
+                showNumber(procNumber(result2));
+                //op3on = true;
+                break;
+
+            case 2:
+                op1 = (long) (result * 1000000000);
+                op2 = (long) (Double.parseDouble(oper2) * 1000000000);
+                result2 = ((double) (op1 - op2))/1000000000;
+                showNumber(procNumber(result2));
+                //op3on = true;
+                break;
+
+            case 3:
+                result2 = result * Double.parseDouble(oper2);
+                showNumber(procNumber(result2));
+                //op3on = true;
+                break;
+
+            case 4:
+                if (Double.parseDouble(oper2)!=0){
+                    result2 = result / Double.parseDouble(oper2);
+                    showNumber(procNumber(result2));
+                    //op3on = true;
+                    break;
+                } else {
+                    Toast.makeText(this,"делить нельзя на 0",Toast.LENGTH_LONG).show();}
+        }
+    }
+
+    private void equal() {
+
+        long op1;
+        long op2;
+
+        if (oper1.length()==0)oper1="0";
+        if (oper2.length()==0)oper2="0";
+
+        switch (flagAction){
+            case 1:
                 op1 = (long) (Double.parseDouble(oper1) * 1000000000);
                 op2 = (long) (Double.parseDouble(oper2) * 1000000000);
                 result = ((double) (op1 + op2))/1000000000;
                 showNumber(procNumber(result));
-                op3on = true;
+                //op3on = true;
+                firstOperation = false;
                 break;
 
             case 2:
@@ -224,20 +273,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 op2 = (long) (Double.parseDouble(oper2) * 1000000000);
                 result = ((double) (op1 - op2))/1000000000;
                 showNumber(procNumber(result));
-                op3on = true;
+                //op3on = true;
+                firstOperation = false;
                 break;
 
             case 3:
                 result = Double.parseDouble(oper1) * Double.parseDouble(oper2);
                 showNumber(procNumber(result));
-                op3on = true;
+                //op3on = true;
+                firstOperation = false;
                 break;
 
             case 4:
                 if (Double.parseDouble(oper2)!=0){
                     result = Double.parseDouble(oper1) / Double.parseDouble(oper2);
                     showNumber(procNumber(result));
-                    op3on = true;
+                    //op3on = true;
+                    firstOperation = false;
                     break;
                 } else {
                     Toast.makeText(this,"делить нельзя на 0",Toast.LENGTH_LONG).show();}
@@ -289,7 +341,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     oper2 = oper2 + num;
                     showNumber(oper2);
-                    op3on = true;
+                    //op3on = true;
                 }
 
         }
@@ -313,10 +365,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         oper1 = "";
         oper2 = "";
         oper3 = "";
-        op3on = false;
+        //op3on = false;
         flagAction = 0;
         result = 0;
+        result2 = 0;
         flagPoint = false;
+        firstOperation = true;
     }
 
 }
