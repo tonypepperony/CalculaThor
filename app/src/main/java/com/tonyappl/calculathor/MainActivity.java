@@ -116,27 +116,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btnPlus:
-                        flagAction = 1;
-                        flagPoint = false;
-                        break;
+                if (firstOperation) {
+                    flagAction = 1;
+                    flagPoint = false;
+                    break;
+                } else {
+                    break;
+                }
 
             case R.id.btnMinus:
+                if (firstOperation) {
                     flagAction = 2;
                     flagPoint = false;
                     break;
+                } else {
+                    break;
+                }
 
 
             case R.id.btnMulti:
+                if (firstOperation) {
                     flagAction = 3;
                     flagPoint = false;
                     break;
+                } else {
+                    break;
+                }
 
 
             case R.id.btnDiv:
+                if (firstOperation) {
                     flagAction = 4;
                     flagPoint = false;
                     break;
-
+                } else {
+                    break;
+                }
 
             case R.id.btnEqual:
                 if (firstOperation){
