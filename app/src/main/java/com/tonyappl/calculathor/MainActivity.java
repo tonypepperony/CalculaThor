@@ -1,5 +1,6 @@
 package com.tonyappl.calculathor;
 
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -79,41 +80,82 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn1:
-                ClickNumber("1");
-                break;
+                if (firstOperation){
+                    ClickNumber("1");
+                    break;
+                } else {
+                    break;
+                }
+
             case R.id.btn2:
-                ClickNumber("2");
-                break;
+                if (firstOperation){
+                    ClickNumber("2");
+                    break;
+                } else {
+                    break;
+                }
+
             case R.id.btn3:
-                ClickNumber("3");
-                break;
+                if (firstOperation){
+                    ClickNumber("3");
+                    break;
+                } else {
+                    break;
+                }
             case R.id.btn4:
-                ClickNumber("4");
-                break;
+                if (firstOperation){
+                    ClickNumber("4");
+                    break;
+                } else {
+                    break;
+                }
             case R.id.btn5:
-                ClickNumber("5");
-                break;
+                if (firstOperation){
+                    ClickNumber("5");
+                    break;
+                } else {
+                    break;
+                }
             case R.id.btn6:
-                ClickNumber("6");
-                break;
+                if (firstOperation){
+                    ClickNumber("6");
+                    break;
+                } else {
+                    break;
+                }
             case R.id.btn7:
-                ClickNumber("7");
-                break;
+                if (firstOperation){
+                    ClickNumber("7");
+                    break;
+                } else {
+                    break;
+                }
             case R.id.btn8:
-                ClickNumber("8");
-                break;
-            case R.id.btn9:
-                ClickNumber("9");
-                break;
+                if (firstOperation){
+                    ClickNumber("8");
+                    break;
+                } else {
+                    break;
+                }case R.id.btn9:
+                if (firstOperation){
+                    ClickNumber("9");
+                    break;
+                } else {
+                    break;
+                }
 
             case R.id.btn0:
-                if (flagAction == 0){
-                    if (oper1.equals("0")){break;}
-                    if (oper1.length()!=0)ClickNumber("0");
-                }else{
-                    if (!(oper2.equals("0")))ClickNumber("0");
+                if (firstOperation){
+                    if (flagAction == 0){
+                        if (oper1.equals("0")){break;}
+                        if (oper1.length()!=0)ClickNumber("0");
+                    }else{
+                        if (!(oper2.equals("0")))ClickNumber("0");
+                    }
+                    break;
+                } else {
+                    break;
                 }
-                break;
 
             case R.id.btnPlus:
                 if (firstOperation) {
